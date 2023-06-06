@@ -26,6 +26,7 @@ wget -P /etc/yum.repos.d https://xcat.org/files/xcat/repos/yum/xcat-dep/rh7/x86_
 yum -y install xCAT
 
 #to enable commands
+
 . /etc/profile.d/xcat.sh
 
 #make defination
@@ -34,7 +35,7 @@ mkdef
 #tabdump
 tabdump site
 
-#
+#XCAT VERSION
 lsxcatd -v
 
 #setting network adapter
