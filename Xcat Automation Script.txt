@@ -73,6 +73,7 @@ echo "/etc/passwd -> /etc/passwd" > /install/custom/netboot/compute.synclist
 echo "/etc/group -> /etc/group" >> /install/custom/netboot/compute.synclist
 echo "/etc/shadow -> /etc/shadow" >> /install/custom/netboot/compute.synclist
 
+
 #PACKIMAGE
 packimage centos7.9-x86_64-netboot-compute
 
