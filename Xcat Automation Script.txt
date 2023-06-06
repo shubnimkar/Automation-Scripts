@@ -95,7 +95,7 @@ lsdef $nodename
 makehosts
 
 #MAKE NETWORKS
-makeenetworks
+makenetworks
 
 #MAKE DHCP
 makedhcp -n
