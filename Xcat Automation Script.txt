@@ -59,6 +59,9 @@ lsdef -t osimage centos7.9-x86_64-netboot-compute
 #GENERATE IMAGE
 genimage centos7.9-x86_64-netboot-compute
 
+
+mkdir -p /install/custom/netboot
+
 #CHANGE DEFINATIONS
 chdef -t osimage -o centos7.9-x86_64-netboot-compute synclists="/install/custom/netboot/compute.synclist"
 
