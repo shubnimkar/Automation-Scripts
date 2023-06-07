@@ -28,7 +28,19 @@ yum -y install xCAT
 
 #to enable commands
 
-. /etc/profile.d/xcat.sh
+#. /etc/profile.d/xcat.sh
+
+# Add xCAT environment setup to ~/.bashrc
+
+echo "source /etc/profile.d/xcat.sh" >> ~/.bashrc
+
+# Reload the ~/.bashrc file in the current shell session
+
+source ~/.bashrc
+
+echo "xCAT tools enabled in the current shell."
+
+
 
 #make defination
 mkdef
