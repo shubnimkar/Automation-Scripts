@@ -1,6 +1,7 @@
 #!/bin/bash
 
 #Disable SE LINUX
+
 setenforce 0
 getenforce
 
