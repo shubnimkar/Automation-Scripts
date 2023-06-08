@@ -1,0 +1,23 @@
+1  cd
+    2  setenforce 0
+    3  getenforce
+    4  systemctl status firewalld
+    5  systemctl stop firewalld
+    6  systemctl disable firewalld
+    7  systemctl status firewalld
+    8  ip a
+    9  arp -a
+   10  hostname
+   11  hostnamectl set-hostname ldap1.cdac.in
+   12  cat /etc/hosys
+   13  cat /etc/hosts
+   14  ip a
+   15  vim /etc/hosts
+   16  arp -a
+   17  clear
+   18  yum install -y openldap-servers openldap-clients
+   19  cp /usr/share/openldap-servers/DB_CONFIG.example  /var/lib/ldap/DB_CONFIG
+   20  chown ldap. /var/lib/ldap/DB_CONFIG 
+   21  systemctl start slapd
+   22  systemctl enable slapd
+   23  systemctl status slapd
