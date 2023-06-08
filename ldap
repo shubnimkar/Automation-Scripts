@@ -79,8 +79,40 @@ SASL SSF: 0
 adding new entry "cn=nis,cn=schema,cn=config"
 
 [root@ldap1 schema]# ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/inetorgperson.ldif 
-SASL/EXTERNAL authentication started
+SASL/EXTERNAL authentication started[root@ldap1 ~]# vi chdomain.ldif
+[root@ldap1 ~]# cat chdomain.ldif
+dn: olcDatabase={1}monitor,cn=config
+changetype: modify
+replace: olcAccess
+olcAccess: {0}to * by dn.base="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth"
+  read by dn.base="cn=Manager,dc=cdac,dc=in" read by * none
+
+dn: olcDatabase={2}mdb,cn=config
+changetype: modify
+replace: olcSuffix
+olcSuffix: dc=cdac,dc=in
+
+dn: olcDatabase={2}mdb,cn=config
+changetype: modify
+replace: olcRootDN
+olcRootDN: cn=Manager,dc=cdac,dc=in
+
+dn: olcDatabase={2}mdb,cn=config
+changetype: modify
+add: olcRootPW
+olcRootPW: {SSHA}Xw4kWMRG1Su3XeqSF/bMah5RCgDH54o+
+
+dn: olcDatabase={2}mdb,cn=config
+changetype: modify
+add: olcAccess
+olcAccess: {0}to attrs=userPassword,shadowLastChange by
+  dn="cn=Manager,dc=cdac,dc=in" write by anonymous auth by self write by * none
+olcAccess: {1}to dn.base="" by * read
+olcAccess: {2}to * by dn="cn=Manager,dc=cdac,dc=in" write by * read
+
 SASL username: gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth
 SASL SSF: 0
 adding new entry "cn=inetorgperson,cn=schema,cn=config"
+
+
 
