@@ -7,6 +7,7 @@ systemctl stop firewalld
 systemctl disable firewalld
 systemctl status firewalld
 
+##################################################################################################################################
 hostname
 hostnamectl set-hostname ldap1.cdac.in
 
@@ -14,7 +15,7 @@ cat /etc/hosts
 ip a
 vim /etc/hosts
 
-
+##################################################################################################################################
 #ON MASTER
 #INSTALL SERVICES
 
@@ -22,15 +23,17 @@ yum install -y openldap-servers openldap-clients
 
 
 cp /usr/share/openldap-servers/DB_CONFIG.example  /var/lib/ldap/DB_CONFIG
-
+##################################################################################################################################
 #CHANGE OWNERSHIP
 chown ldap. /var/lib/ldap/DB_CONFIG 
 
+##################################################################################################################################
 #START SLAPD
 systemctl start slapd
 systemctl enable slapd
 systemctl status slapd
 
+##################################################################################################################################
 #TO SET PASSWORD
 
 [root@ldap1 ~]# slappasswd
@@ -38,6 +41,7 @@ New password:
 Re-enter new password: 
 {SSHA}Xw4kWMRG1Su3XeqSF/bMah5RCgDH54o+
 
+##################################################################################################################################
 #SET NEW PASSWORD TO OLCROOTPW FILE
 
 [root@ldap1 ~]# vi chrootpw.ldif
@@ -47,6 +51,7 @@ changetype: modify
 add: olcRootPW
 olcRootPW: {SSHA}Xw4kWMRG1Su3XeqSF/bMah5RCgDH54o+
 
+##################################################################################################################################
 #WE ARE ADDING CHROOT FILE TO LDAP DATABASE
 
 [root@ldap1 ~]# ldapadd -Y EXTERNAL -H ldapi:/// -f chrootpw.ldif
@@ -66,11 +71,16 @@ THEY ARE AUTHENTICATION PROTOCOL
 SCHEMA : PARAMETERS OR ATTRIBUTES (MAIL ,ID ,NAME ,NUMBER) IN DB
 
 #IMPORT BASIC SCHEMA which are already present and we are importing in our ldap
+
+##################################################################################################################################
+
 [root@ldap1 schema]# ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/cosine.ldif 
 SASL/EXTERNAL authentication started
 SASL username: gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth
 SASL SSF: 0
 adding new entry "cn=cosine,cn=schema,cn=config"
+
+##################################################################################################################################
 
 [root@ldap1 schema]# ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/nis.ldif 
 SASL/EXTERNAL authentication started
@@ -78,6 +88,8 @@ SASL username: gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth
 SASL SSF: 0
 adding new entry "cn=nis,cn=schema,cn=config"
 
+
+##################################################################################################################################
 [root@ldap1 schema]# ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/inetorgperson.ldif 
 SASL/EXTERNAL authentication started[root@ldap1 ~]# vi chdomain.ldif
 
@@ -86,6 +98,7 @@ SASL username: gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth
 SASL SSF: 0
 adding new entry "cn=inetorgperson,cn=schema,cn=config"
 
+##################################################################################################################################
 [root@ldap1 ~]# cat chdomain.ldif
 dn: olcDatabase={1}monitor,cn=config
 changetype: modify
@@ -116,6 +129,7 @@ olcAccess: {0}to attrs=userPassword,shadowLastChange by
 olcAccess: {1}to dn.base="" by * read
 olcAccess: {2}to * by dn="cn=Manager,dc=cdac,dc=in" write by * read
 
+##################################################################################################################################
 [root@ldap1 ~]# ldapmodify -Y EXTERNAL -H ldapi:/// -f chdomain.ldif
 SASL/EXTERNAL authentication started
 SASL username: gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth
@@ -130,3 +144,4 @@ modifying entry "olcDatabase={2}hdb,cn=config"
 
 modifying entry "olcDatabase={2}hdb,cn=config"
 
+##################################################################################################################################
