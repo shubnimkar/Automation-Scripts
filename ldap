@@ -145,3 +145,82 @@ modifying entry "olcDatabase={2}hdb,cn=config"
 modifying entry "olcDatabase={2}hdb,cn=config"
 
 ##################################################################################################################################
+[root@ldap1 ~]# vi basedomain.ldif
+[root@ldap1 ~]# cat basedomain.ldif
+dn: dc=cdac,dc=in
+objectClass: top
+objectClass: dcObject
+objectclass: organization
+o: cdac in
+dc: cdac
+
+dn: cn=Manager,dc=cdac,dc=in
+objectClass: organizationalRole
+cn: Manager
+description: Directory Manager
+
+dn: ou=People,dc=cdac,dc=in
+objectClass: organizationalUnit
+ou: People
+
+dn: ou=Group,dc=cdac,dc=in
+objectClass: organizationalUnit
+ou: Group
+
+##################################################################################################################################
+[root@ldap1 ~]# ldapadd -x -D cn=Manager,dc=cdac,dc=in -W -f basedomain.ldif 
+Enter LDAP Password: 
+adding new entry "dc=cdac,dc=in"
+
+adding new entry "cn=Manager,dc=cdac,dc=in"
+
+adding new entry "ou=People,dc=cdac,dc=in"
+
+adding new entry "ou=Group,dc=cdac,dc=in"
+
+
+##################################################################################################################################
+
+
+
+[root@ldap1 ~]# vim ldapuser.ldif
+[root@ldap1 ~]# ldapadd -x -D cn=Manager,dc=cdac,dc=in -W -f ldapuser.ldif
+Enter LDAP Password: 
+adding new entry "uid=user1,ou=People,dc=cdac,dc=in"
+
+adding new entry "cn=user1,ou=Group,dc=cdac,dc=in"
+
+[root@ldap1 ~]# cat ldapuser.ldif 
+dn: uid=user1,ou=People,dc=cdac,dc=in
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+cn: user1
+sn: test
+userPassword: {SSHA}Xw4kWMRG1Su3XeqSF/bMah5RCgDH54o+
+loginShell: /bin/bash
+uidNumber: 1001
+gidNumber: 1001
+homeDirectory: /home/user1
+
+dn: cn=user1,ou=Group,dc=cdac,dc=in
+objectClass: posixGroup
+cn: user1
+gidNumber: 1001
+
+##################################################################################################################################
+ON CLIENT MACHINE
+
+yum -y install openldap-clients nss-pam-ldapd
+
+
+
+
+
+
+
+
+
+
+
+
