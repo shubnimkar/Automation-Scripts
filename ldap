@@ -1,23 +1,66 @@
-1  cd
-    2  setenforce 0
-    3  getenforce
-    4  systemctl status firewalld
-    5  systemctl stop firewalld
-    6  systemctl disable firewalld
-    7  systemctl status firewalld
-    8  ip a
-    9  arp -a
-   10  hostname
-   11  hostnamectl set-hostname ldap1.cdac.in
-   12  cat /etc/hosys
-   13  cat /etc/hosts
-   14  ip a
-   15  vim /etc/hosts
-   16  arp -a
-   17  clear
-   18  yum install -y openldap-servers openldap-clients
-   19  cp /usr/share/openldap-servers/DB_CONFIG.example  /var/lib/ldap/DB_CONFIG
-   20  chown ldap. /var/lib/ldap/DB_CONFIG 
-   21  systemctl start slapd
-   22  systemctl enable slapd
-   23  systemctl status slapd
+#ON MASTER AND NODE
+
+setenforce 0
+getenforce
+systemctl status firewalld
+systemctl stop firewalld
+systemctl disable firewalld
+systemctl status firewalld
+
+hostname
+hostnamectl set-hostname ldap1.cdac.in
+
+cat /etc/hosts
+ip a
+vim /etc/hosts
+
+
+#ON MASTER
+#INSTALL SERVICES
+
+yum install -y openldap-servers openldap-clients
+
+
+cp /usr/share/openldap-servers/DB_CONFIG.example  /var/lib/ldap/DB_CONFIG
+
+#CHANGE OWNERSHIP
+chown ldap. /var/lib/ldap/DB_CONFIG 
+
+#START SLAPD
+systemctl start slapd
+systemctl enable slapd
+systemctl status slapd
+
+#TO SET PASSWORD
+
+[root@ldap1 ~]# slappasswd
+New password: 
+Re-enter new password: 
+{SSHA}Xw4kWMRG1Su3XeqSF/bMah5RCgDH54o+
+
+#SET NEW PASSWORD TO OLCROOTPW FILE
+
+[root@ldap1 ~]# vi chrootpw.ldif
+[root@ldap1 ~]# cat chrootpw.ldif 
+dn: olcDatabase={0}config,cn=config
+changetype: modify
+add: olcRootPW
+olcRootPW: {SSHA}Xw4kWMRG1Su3XeqSF/bMah5RCgDH54o+
+
+#WE ARE ADDING CHROOT FILE TO LDAP DATABASE
+
+[root@ldap1 ~]# ldapadd -Y EXTERNAL -H ldapi:/// -f chrootpw.ldif
+SASL/EXTERNAL authentication started
+SASL username: gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth
+SASL SSF: 0
+modifying entry "olcDatabase={0}config,cn=config"
+
+-Y: PROTOCOL
+PART OF SASL
+ANONYMOUS: USED FOR GUEST
+EXTERNAL : USED FOR LDAP
+THEY ARE AUTHENTICATION PROTOCOL
+
+-H :HOST 
+
+SCHEMA : PARAMETERS OR ATTRIBUTES (MAIL ,ID ,NAME ,NUMBER) IN DB
