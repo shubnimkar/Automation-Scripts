@@ -1,0 +1,38 @@
+Open LDAP change Admin password
+
+
+
+
+1. Find slapd
+
+>> locate slapd
+
+2. Find user activity in slapd.log
+
+>> grep -i username101 slapd.log 
+
+3. Get the Root Credentials
+
+>> ldapsearch -LLL -Y EXTERNAL -H ldapi:/// -b  cn=config olcRootDN=cn=admin,dc=com,dc=example  dn olcRootDN olcRootPW
+
+4. Create slapd pasword
+
+>> slappasswd -h {SHA}
+
+5. create ldif file changepwd
+
+dn: olcDatabase={2}bdb,cn=config
+#olcRootDN: cn=admin,dc=com,dc=example
+changetype: modify
+replace: olcRootPW
+olcRootPW: {SHA} lfkrqwerhweir09qwe9ruwuq3er4 (create your own) using step 4
+
+5. Modify Admin password 
+>> ldapmodify -H ldapi:// -Y EXTERNAL -f ./changepwd.ldif
+
+
+
+
+
+
+https://www.itzgeek.com/how-tos/linux/centos-how-tos/install-configure-phpldapadmin-centos-7-ubuntu-16-04.html#Pre-requisites
