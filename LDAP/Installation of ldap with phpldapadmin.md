@@ -357,3 +357,14 @@ check for entries and commit.
 ![image](https://github.com/shubnimkar/Automation-Scripts/assets/46809421/84ba35ca-42cf-43c8-bb2c-322e6bbfa1fd)
 NOW you can see in left panel Systemadmin 
 
+2. To add user
+ perform adding like before and you'll see panel like this and you can add.
+ 
+![image](https://github.com/shubnimkar/Automation-Scripts/assets/46809421/784fc33b-0877-4a8b-b948-7c084b42e148)
+
+![image](https://github.com/shubnimkar/Automation-Scripts/assets/46809421/ab89cffe-d249-4ce0-859e-00d49e583399)
+
+and Done!!!
+
+Hence you can manage as per your needs.
+
