@@ -20,7 +20,9 @@
 #START AND ENABLE gmetad,gmond,httpd
 
 >> systemctl start gmetad.service gmond.service httpd.service
+
 >> systemctl status gmetad.service gmond.service httpd.service
+
 >> systemctl enable gmetad.service gmond.service httpd.service
 
 #CONFIGURE gmond.conf
