@@ -267,3 +267,27 @@ session     required      pam_unix.so
 session     optional      pam_sss.so
 
 
+
+
+yum --enablerepo=epel -y install phpldapadmin
+   71  vi /etc/phpldapadmin/config.php
+   72  vi /etc/httpd/conf.d/phpldapadmin.conf
+   
+   
+   
+   # install from EPEL
+[root@dlp ~]# yum --enablerepo=epel -y install phpldapadmin
+[root@dlp ~]# vi /etc/phpldapadmin/config.php
+# line 397: uncomment, line 398: comment out
+$servers->setValue('login','attr','dn');
+// $servers->setValue('login','attr','uid');
+[root@dlp ~]# vi /etc/httpd/conf.d/phpldapadmin.conf
+Alias /phpldapadmin /usr/share/phpldapadmin/htdocs
+Alias /ldapadmin /usr/share/phpldapadmin/htdocs
+<Directory /usr/share/phpldapadmin/htdocs>
+  <IfModule mod_authz_core.c>
+    # Apache 2.4
+    # line 12: add access permission
+    Require local
+    Require ip 10.0.0.0/24
+[root@dlp ~]# systemctl restart httpd
