@@ -320,14 +320,15 @@ Alias /ldapadmin /usr/share/phpldapadmin/htdocs
 
 Access to the "http://(server's hostname or IP address)/ldapadmin/" from a client which is in the network allowed by http server and then Click "login".
 
-![LDAP - VMware Workstation 14-06-2023 12_29_03](https://github.com/shubnimkar/Automation-Scripts/assets/46809421/91cec342-0daf-49a6-bc90-c8cd3c94fb4d)
+    ![LDAP - VMware Workstation 14-06-2023 12_29_03](https://github.com/shubnimkar/Automation-Scripts/assets/46809421/91cec342-0daf-49a6-bc90-c8cd3c94fb4d)
 
 Just logined. It's possible to manage LDAP server on here.
 
-![LDAP - VMware Workstation 14-06-2023 12_40_10](https://github.com/shubnimkar/Automation-Scripts/assets/46809421/48a6602a-e76a-4ae6-8db2-8e0dab9a88de)
+    ![LDAP - VMware Workstation 14-06-2023 12_40_10](https://github.com/shubnimkar/Automation-Scripts/assets/46809421/48a6602a-e76a-4ae6-8db2-8e0dab9a88de)
 
+This is what homepage looks like.
 
-![LDAP - VMware Workstation 14-06-2023 12_41_09](https://github.com/shubnimkar/Automation-Scripts/assets/46809421/0b7bd1a5-3d60-47a7-acd1-4622d3169bb3)
+    ![LDAP - VMware Workstation 14-06-2023 12_41_09](https://github.com/shubnimkar/Automation-Scripts/assets/46809421/0b7bd1a5-3d60-47a7-acd1-4622d3169bb3)
 
 
 
