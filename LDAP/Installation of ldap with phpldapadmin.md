@@ -320,15 +320,26 @@ Alias /ldapadmin /usr/share/phpldapadmin/htdocs
 
 Access to the "http://(server's hostname or IP address)/ldapadmin/" from a client which is in the network allowed by http server and then Click "login".
 
-   ![LDAP - VMware Workstation 14-06-2023 12_29_03](https://github.com/shubnimkar/Automation-Scripts/assets/46809421/91cec342-0daf-49a6-bc90-c8cd3c94fb4d)
+![LDAP - VMware Workstation 14-06-2023 12_29_03](https://github.com/shubnimkar/Automation-Scripts/assets/46809421/91cec342-0daf-49a6-bc90-c8cd3c94fb4d)
 
 Just logined. It's possible to manage LDAP server on here.
 
-   ![LDAP - VMware Workstation 14-06-2023 12_40_10](https://github.com/shubnimkar/Automation-Scripts/assets/46809421/48a6602a-e76a-4ae6-8db2-8e0dab9a88de)
+![LDAP - VMware Workstation 14-06-2023 12_40_10](https://github.com/shubnimkar/Automation-Scripts/assets/46809421/48a6602a-e76a-4ae6-8db2-8e0dab9a88de)
 
 This is what homepage looks like.
 
-   ![LDAP - VMware Workstation 14-06-2023 12_41_09](https://github.com/shubnimkar/Automation-Scripts/assets/46809421/0b7bd1a5-3d60-47a7-acd1-4622d3169bb3)
+![LDAP - VMware Workstation 14-06-2023 12_41_09](https://github.com/shubnimkar/Automation-Scripts/assets/46809421/0b7bd1a5-3d60-47a7-acd1-4622d3169bb3)
+
+You can see on left hand side the OU,GROUPS AND USERS which youv've created
+
+![LDAP - VMware Workstation 14-06-2023 12_44_22](https://github.com/shubnimkar/Automation-Scripts/assets/46809421/ffa1588a-a84b-4e71-898c-12ba433b46ed)
+
+You can add yourself too like done here
+1. lets add in "dc" look for highlighted section
+
+![image](https://github.com/shubnimkar/Automation-Scripts/assets/46809421/03a091bd-d016-4053-80ce-fed3ae488641)
+
+then click on create child entry
 
 
 
