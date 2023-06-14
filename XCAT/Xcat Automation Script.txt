@@ -1,0 +1,129 @@
+#!/bin/bash
+
+#Disable SE LINUX
+
+setenforce 0
+getenforce
+
+#disable firewall
+systemctl status firewalld
+systemctl stop firewalld
+systemctl disable firewalld
+systemctl status firewalld
+
+#install yum utils
+yum install yum-utils -y
+
+#install epel-release
+yum install epel-release -y
+
+#install core repo
+wget -P /etc/yum.repos.d https://xcat.org/files/xcat/repos/yum/latest/xcat-core/xcat-core.repo --no-check-certificate
+
+#install dep repo
+wget -P /etc/yum.repos.d https://xcat.org/files/xcat/repos/yum/xcat-dep/rh7/x86_64/xcat-dep.repo --no-check-certificate
+
+#Install xcat
+yum -y install xCAT
+
+#to enable commands
+
+#. /etc/profile.d/xcat.sh
+
+# Add xCAT environment setup to ~/.bashrc
+
+echo "source /etc/profile.d/xcat.sh" >> ~/.bashrc
+
+# Reload the ~/.bashrc file in the current shell session
+
+source ~/.bashrc
+
+echo "xCAT tools enabled in the current shell."
+
+
+
+#make defination
+mkdef
+
+#tabdump
+tabdump site
+
+#XCAT VERSION
+lsxcatd -v
+
+#setting network adapter
+read -p "Enter your adapter name : " name
+
+chdef -t site dhcpinterface=$name
+#listblocks
+lsblk
+
+#
+dd if=/dev/sr0 of=centos.iso
+
+#COPY IMAGE
+copycds centos.iso
+
+#
+lsdef -t osimage
+
+#ENTER OS IMAGE
+lsdef -t osimage centos7.9-x86_64-netboot-compute
+
+#GENERATE IMAGE
+genimage centos7.9-x86_64-netboot-compute
+
+
+mkdir -p /install/custom/netboot
+
+#CHANGE DEFINATIONS
+chdef -t osimage -o centos7.9-x86_64-netboot-compute synclists="/install/custom/netboot/compute.synclist"
+
+lsdef -t osimage centos7.9-x86_64-netboot-compute
+
+#SYNCLISTS
+echo "/etc/passwd -> /etc/passwd" > /install/custom/netboot/compute.synclist
+echo "/etc/group -> /etc/group" >> /install/custom/netboot/compute.synclist
+echo "/etc/shadow -> /etc/shadow" >> /install/custom/netboot/compute.synclist
+
+
+#PACKIMAGE
+packimage centos7.9-x86_64-netboot-compute
+
+#ENTER NODE NAME
+read -p "Enter your node name : " nodename
+#ENTER MAC ADDRESS
+read -p "Enter your mac address : " mac
+#ENTER IP
+read -p "Enter your ip : " ip
+
+#MAKE NODE DEFINATION
+mkdef -f -t node $nodename groups=compute,all ip=$ip mac=$mac netboot=xnba
+
+#domain name
+read -p "Enter your domain name : " domainname
+chdef -t site domain=$domainname
+
+tabdaump site |grep domain
+
+#check node info
+lsdef $nodename
+
+#REGISTER HOSTS
+makehosts
+
+#MAKE NETWORKS
+makenetworks
+
+#MAKE DHCP
+makedhcp -n
+
+#MAKE DNS
+makedns -n
+
+#TO check OS image
+
+lsdef -t osimage
+
+#Set node
+nodeset compute osimage=centos7.9-x86_64-netboot-compute
