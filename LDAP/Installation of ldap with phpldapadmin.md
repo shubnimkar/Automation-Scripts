@@ -278,6 +278,7 @@ IF YOU SEE PASSWORD IS DENIED COMPARE WITH THE FILE BELOW AND CHANGE PARAMETERS
 
 # INSTALL PHP LDAP ADMIN
 
+>> yum install epel-release
 >> yum --enablerepo=epel -y install phpldapadmin
 
 # EDIT IN Config.php
