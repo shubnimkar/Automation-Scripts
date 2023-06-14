@@ -320,4 +320,5 @@ Alias /ldapadmin /usr/share/phpldapadmin/htdocs
 
 Access to the "http://(server's hostname or IP address)/ldapadmin/" from a client which is in the network allowed by http server and then Click "login".
 
+![LDAP - VMware Workstation 14-06-2023 12_29_03](https://github.com/shubnimkar/Automation-Scripts/assets/46809421/91cec342-0daf-49a6-bc90-c8cd3c94fb4d)
 
