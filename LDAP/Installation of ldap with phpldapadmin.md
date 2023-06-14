@@ -339,8 +339,21 @@ You can add yourself too like done here
 
 ![image](https://github.com/shubnimkar/Automation-Scripts/assets/46809421/03a091bd-d016-4053-80ce-fed3ae488641)
 
-then click on create child entry
+   then click on create child entry
 
+![image](https://github.com/shubnimkar/Automation-Scripts/assets/46809421/e142955c-0bc8-478c-b96d-5f579d374f74)
 
+   see for highlighted field
 
+![image](https://github.com/shubnimkar/Automation-Scripts/assets/46809421/96b2c47f-5c4b-4cb2-9da0-8da8f0836939)
+![image](https://github.com/shubnimkar/Automation-Scripts/assets/46809421/34f7e39f-e473-4362-8bf5-259c75842e67)
+
+  add the required fields as per your needs and click on create object.
+
+![image](https://github.com/shubnimkar/Automation-Scripts/assets/46809421/3971c002-3b13-480f-8716-0b20f180a8b3)
+
+check for entries and commit.
+
+![image](https://github.com/shubnimkar/Automation-Scripts/assets/46809421/84ba35ca-42cf-43c8-bb2c-322e6bbfa1fd)
+NOW you can see in left panel Systemadmin 
 
