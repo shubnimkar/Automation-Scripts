@@ -1,8 +1,8 @@
 # HPC TOOLS 
 
-Guides and scripts for HPC Software stack tools
+# Guides and scripts for HPC Software stack tools
 
-Technologies used: 
+#Technologies used: 
 
 ![image](https://github.com/shubnimkar/HPC-Tools/assets/46809421/616c3767-c90d-41fd-a386-cd7842bac6dd)
 ![image](https://github.com/shubnimkar/HPC-Tools/assets/46809421/8fe4fe59-6eab-427b-8515-287d58e7932c)
