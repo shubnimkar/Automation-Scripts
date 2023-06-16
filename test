@@ -116,38 +116,24 @@ firewall-cmd --add-service=nagios --permanent
 firewall-cmd --reload
 
 
-
+########################################################################################################################################################################################
+########################################################################################################################################################################################
 #NOW FOR NODE PART OF INSTALLATION
+
+
+scp /etc/hosts root@node1:/etc/hosts
+
+ssh root@node1
+
+touch script.sh
+cat << EOF >> script.sh
 
 #!/bin/bash
 
-#Script to configure cleint
-#to set host name as a client
+#Pass nagios through firewall
+firewall-cmd --add-service=nagios --permanent
+firewall-cmd --reload
 
-hostnamectl set-hostname client
-
-#to Disable firewall
-
-systemctl stop firewalld.service
-
-systemctl disable firewalld.service
-
-#To disable Selinux
-cd /etc/selinux/config
-
-setenforce 0
-
-sed -i 's/^SELINUX=.*/SELINUX=permissive/g' /etc/selinux/config
-
-#To add the host file details
-echo "add master and client hosts and ip details press ctrl+d to save"
-while xyz= read -r line;
-do
- user_input+="$line"$'\n'
-
-done
-
-echo "$user_input" >> /etc/hosts
 
 #To install repos
 yum install http://build.openhpc.community/OpenHPC:/1.3/CentOS_7/x86_64/ohpc-release-1.3-1.el7.x86_64.rpm -y
@@ -180,5 +166,8 @@ mkdir /var/log/nagios
 chown -R nrpe:nrpe /var/log/nagios
 
 systemctl restart nrpe
-
 systemctl enable nrpe
+
+EOF
+
+bash script.sh
