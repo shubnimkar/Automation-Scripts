@@ -1,0 +1,189 @@
+Reference Help Link: https://github.com/dasandata/Open_HPC/blob/master/Provisioning/OpenHPC%20Cluster%20Building%20(v1.3.9-CentOS7.7%20Base%20OS).md
+
+Master VM with two Network adapters (ens33,ens36)
+--------------------------------
+Warewulf installation (Network Boot in HPC Cluster)
+________________________________
+
+# yum -y install yum-utils
+
+# yum install http://build.openhpc.community/OpenHPC:/1.3/CentOS_7/x86_64/ohpc-release-1.3-1.el7.x86_64.rpm
+
+# yum -y install ohpc-base
+
+# yum -y install ohpc-warewulf
+
+	* >> # yum install chrony
+
+	* >> # vi /etc/chrony.conf
+
+	* >> # systemctl start chronyd
+
+	* >> # systemctl enable chronyd
+
+# vi /etc/warewulf/provision.conf
+
+  >> change network device = ens36
+
+# vi /etc/xinetd.d/tftp
+
+  >> disable = no
+
+# ifconfig ${INT_NIC}
+
+# systemctl restart xinetd
+# systemctl enable mariadb.service
+# systemctl restart mariadb
+# systemctl enable httpd.service
+# systemctl restart httpd
+# systemctl enable dhcpd.service
+
+	* >>	# dd if=/dev/sr0 of=/root/centos7.7.iso
+
+		9203712+0 records in
+		9203712+0 records out
+		4712300544 bytes (4.7 GB) copied, 1467.24 s, 3.2 MB/s
+
+
+	* >>  # cp centos7.7.iso /opt/ohpc/admin/images
+
+# echo ${CHROOT}
+
+# export CHROOT=/opt/ohpc/admin/images/centos7.7
+
+# echo ${CHROOT}
+
+# wwmkchroot centos-7 $CHROOT
+
+# uname -r
+
+# chroot ${CHROOT} uname -r
+
+# yum -y --installroot=$CHROOT install ohpc-base-compute
+
+# cat /etc/resolv.conf
+
+# cp -p /etc/resolv.conf $CHROOT/etc/resolv.conf
+
+	*    >> # yum -y --installroot=$CHROOT install chrony
+
+# yum -y --installroot=$CHROOT install kernel
+
+# yum -y --installroot=$CHROOT install lmod-ohpc
+
+# wwinit database
+
+# wwinit ssh_keys
+
+# df -hT | grep -v tmpfs
+
+
+# hostname
+
+# cat  ${CHROOT}/etc/fstab
+
+# echo "master:/home /home nfs nfsvers=3,nodev,nosuid 0 0" >> $CHROOT/etc/fstab
+
+# echo "master:/opt/ohpc/pub /opt/ohpc/pub nfs nfsvers=3,nodev 0 0" >> $CHROOT/etc/fstab
+
+# echo "/home *(rw,no_subtree_check,fsid=10,no_root_squash)" >> /etc/exports
+
+# echo "/opt/ohpc/pub *(ro,no_subtree_check,fsid=11)" >> /etc/exports
+
+# exportfs -arv
+
+
+# systemctl start nfs-server
+
+# systemctl status nfs-server
+
+# systemctl enable nfs-server
+
+
+		*  >> # chroot $CHROOT systemctl enable chronyd
+
+
+		* >> # echo "server master" >> $CHROOT/etc/chrony.conf
+
+
+# wwsh file list
+
+# wwsh file import /etc/passwd
+
+# wwsh file import /etc/group
+
+# wwsh file import /etc/shadow
+
+# wwsh file list
+
+
+# export WW_CONF=/etc/warewulf/bootstrap.conf
+
+# echo "drivers += updates/kernel/" >> $WW_CONF
+
+# echo "modprobe += ahci, nvme"           >> $WW_CONF
+
+# echo "drivers += overlay" >> $WW_CONF
+
+
+
+
+# wwbootstrap `uname -r`
+
+
+# echo ${CHROOT}
+
+# wwvnfs --chroot $CHROOT
+or
+# wwvnfs --chroot /opt/ohpc/admin/images/centos7.7
+
+# wwsh vnfs list
+
+
+**************
+
+# echo "GATEWAYDEV=ens36" > /tmp/network.wwsh
+
+# wwsh -y file import /tmp/network.wwsh --name network
+
+# wwsh -y file set network --path /etc/sysconfig/network --mode=0644 --uid=0
+
+# wwsh node new node1
+
+# wwsh node set node1 --netdev ens36 --ipaddr=192.168.23.150 --hwaddr=00:0C:29:EC:16:C2 --netmask=255.255.255.0 --gateway 192.168.23.128
+
+# wwsh node list
+
+# wwsh -y provision set node1 --vnfs=centos7.7 --bootstrap=`uname -r` --files=dynamic_hosts,passwd,group,shadow,network
+
+# systemctl restart dhcpd && wwsh pxe update
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Alternative:
+----------------------------------------------------------------
+echo "
+systemctl enable  dhcpd
+systemctl restart xinetd
+systemctl enable  mariadb
+systemctl restart mariadb
+systemctl enable  httpd
+systemctl restart httpd
+" > /tmp/provisioning_service_run.sh
+
+bash /tmp/provisioning_service_run.sh
+
+
+
