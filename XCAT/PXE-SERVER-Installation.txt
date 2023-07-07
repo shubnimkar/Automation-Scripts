@@ -1,0 +1,215 @@
+==========================================================================================
+   PXE BOOT SERVER INSTALLATION ON CENTOS7 / CENTOS8 WITH CENTOS 7
+==========================================================================================
+
+===========================================================================================
+          ADD ONE VM WITH 2 NETWORK ADAPTER 1-NET MOOD & 2-HOST ONLY
+===========================================================================================
+
+
+=======================
+   DHCP SERVER
+=======================
+
+
+[root@master ~]# yum install dhcp
+[root@master ~]# cp /usr/share/doc/dhcp-4.2.5/dhcpd.conf.example /etc/dhcpd.conf
+[root@master ~]# vi /etc/dhcp/dhcpd.conf
+
+                --------------------------------------------------
+                 option domain-name-servers 192.168.100.100;
+
+                 default-lease-time 600;
+                 max-lease-time 7200;
+                 log-facility local7;
+
+                 subnet 192.168.100.0 netmask 255.255.255.0 {
+                 range  192.168.100.101 192.168.100.120;
+                 option routers 192.168.100.100;
+                 filename          "pxelinux.0";
+                 next-server       192.168.100.100;
+                 }
+                ---------------------------------------------------
+                 remove add lines then pest this code & save
+                --------------------------------------------------- 
+
+
+[root@master ~]# dhcpd -t
+[root@master ~]# systemctl start dhcpd.service
+[root@master ~]# systemctl status dhcpd.service
+
+===========================================================================================
+===========================================================================================
+
+=======================
+   TFTP-SERVER
+=======================
+
+
+[root@master ~]# yum install syslinux xinetd tftp-server 
+[root@master ~]# mkdir /var/lib/tftpboot/pxelinux.cfg
+[root@master ~]# cp /usr/share/syslinux/pxelinux.0  /var/lib/tftpboot/
+[root@master ~]# ll /var/lib/tftpboot/
+[root@master ~]# vim /etc/xinetd.d/tftp
+
+                -------------------------------------------------
+                service tftp
+                {
+                socket_type             = dgram
+                protocol                = udp
+                wait                    = yes
+                user                    = root
+                server                  = /usr/sbin/in.tftpd
+                server_args             = -s /var/lib/tftpboot
+                disable                 = no
+                per_source              = 11
+                cps                     = 100 2
+                flags                   = IPv4
+               }
+              --------------------------------------------------
+              REMOVE ALL LINE & PEST & SAVE
+              --------------------------------------------------
+
+[root@master ~]# systemctl start xinetd
+[root@master ~]# systemctl enable xinetd
+[root@master ~]# systemctl status xinetd
+[root@master ~]# mkdir -p /var/pxe/centos7
+[root@master ~]# mkdir /var/lib/tftpboot/centos7
+[root@master ~]# mount -t iso9660 -o loop /dev/sr0 /var/pxe/centos7/
+--------------------------------------------------------------------
+       IF COMMAND NOT WORKING , THEN TRY THIS COMMAND
+[root@master ~]# mount -t auto -o loop /dev/sr0 /var/pxe/centos7/
+[root@master ~]# mount -t iso9660 -o loop /dev/sr0 /var/pxe/centos/
+--------------------------------------------------------------------
+[root@master ~]# ll /var/pxe/centos7/
+[root@master ~]# cp /var/pxe/centos7/images/pxeboot/initrd.img /var/lib/tftpboot/centos7/
+[root@master ~]# cp /var/pxe/centos7/images/pxeboot/vmlinuz /var/lib/tftpboot/centos7/
+[root@master ~]# ll /var/lib/tftpboot/centos7/
+[root@master ~]# ll /var/lib/tftpboot/pxelinux.cfg/
+[root@master ~]# cp /usr/share/syslinux/menu.c32 /var/lib/tftpboot/
+[root@master ~]# vi /var/lib/tftpboot/pxelinux.cfg/default
+
+                 ---------------------------------------------------------------------------
+			timeout 100
+			default menu.c32
+
+			menu title ###### PXE BOOT MENU ######
+			label 1
+      			  menu label ^1) Install centos7
+        		kernel centos7/vmlinuz
+        		append initrd=centos7/initrd.img ks=http://192.168.100.100/ks/centos7-ks.cfg
+			label 2
+      			  menu label ^2) BOOT from local drive
+       		 localboot                 
+                 ---------------------------------------------------------------------------
+                 REMOVE ALL LINE & PEST & SAVE
+                 ---------------------------------------------------------------------------
+
+[root@master pxe]# systemctl start tftp.service
+
+
+===========================================================================================
+===========================================================================================
+
+=======================
+   HTTPD- SERVER
+=======================
+
+[root@master ~]# yum install httpd
+[root@master ~]# systemctl start httpd
+[root@master ~]# systemctl enable httpd
+[root@master ~]# systemctl status httpd
+
+
+
+[root@master ~]# vi /etc/httpd/conf.d/pxeboot.conf
+
+                -----------------------------------------
+                 Alias /centos7 /var/pxe/centos7
+                 <Directory /var/pxe/centos7>
+                    options Indexes FollowSymlinks
+                # Ip address we want to allow
+                    Require ip 127.0.0.1 192.168.100.0/24
+                </Directory>          
+                -----------------------------------------
+                    REMOVE ALL LINE & PEST & SAVE
+                -----------------------------------------
+
+[root@master ~]# systemctl restart httpd
+[root@master pxe]# systemctl stop firewalld
+
+==================================================================================================
+==================================================================================================
+
+
+============================
+KickStart Automation Scrip
+============================
+
+[root@master ~]# mkdir /var/www/html/ks
+[root@master ~]# vi /var/www/html/ks/centos7-ks.cfg
+                ----------------------------------------------------------------------------------
+			# create new
+			install                  
+			# automatically proceed for each steps
+			autostep
+			# reboot after installing
+			reboot
+			# encrypt algorithm
+			auth --enableshadow --passalgo=sha512
+			# installation source
+			url --url=http://192.168.100.100/centos7/
+			# install disk
+			ignoredisk --only-use=sda
+			# keyboard layouts
+			keyboard --vckeymap=jp106 --xlayouts='jp','us'
+			# system locale
+			lang en_US.UTF-8
+			# network settings
+			network --bootproto=dhcp --ipv6=auto --activate --hostname=hpcsa
+			# root password you generated above
+			rootpw --iscrypted $6$dPOqruRXWcDN8Jpo$C1myvm4/C1sdzAka8cliPSDkkXjcEm6o0wxQtEDZTcK1m4/qaJuYZ.FgXRv0v0q6BhTcGhCkFMfM95JEOtAEE/
+			# timezone
+			timezone Asia/Tokyo --isUtc --nontp
+			# bootloader's settings
+			bootloader --location=mbr --boot-drive=sda
+			# initialize all partition tables
+			zerombr
+			clearpart --all --initlabel
+			# partitioning
+			autopart --type=lvm
+
+			%packages
+			@core
+
+			%end
+
+                ----------------------------------------------------------------------------------
+                 REMOVE ALL LINE & PEST & SAVE
+                ----------------------------------------------------------------------------------
+
+[root@master ~]# chmod 644 /var/www/html/ks/centos7-ks.cfg
+
+=================================================================================================
+=================================================================================================
+Make new vm without os file (Client PXE) select adapter host only 
+BOOT VIA NETWORK or PXE Server
+
+
+--------------------------------
+Install Centos via PXE Network 
+---------------------------------
+=================================================================================================
+=================================================================================================
+
+
+==================================================================================================
+ If any issues try these commands
+==================================================================================================
+[root@master pxe]# setenforce 0
+[root@master pxe]# systemctl stop firewalld
+[root@master pxe]# systemctl restart dhcpd.service
+[root@master pxe]# systemctl restart xinetd
+[root@master pxe]# systemctl restart httpd
+[root@master pxe]# systemctl start tftp.service
+---------------------------------------------------------------------------------------------------
