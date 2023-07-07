@@ -1,0 +1,277 @@
+[root@master ~]# history
+    1  ip a
+    2  yum install dhcp* -y
+    3  ls /usr/share/
+    4  ls /usr/share/doc/
+    5  ls /usr/share/doc/dhcpc
+    6  vim /usr/share/doc/dhcp-4.2.5/dhcpd.conf.example 
+    7  vim /etc/dhcp/dhcpd.conf 
+    8  cp /usr/share/
+    9  cp /usr/share/doc/
+   10  cp /usr/share/doc/dhcp-4.2.5/dhcpd.conf.example /etc/
+   11  cp /usr/share/doc/dhcp-4.2.5/dhcpd.conf.example /etc/dhcp/dhcpd.conf 
+   12  vim /etc/dhcp/dhcpd.conf 
+   13  vim /etc/hostname
+   14  vim /etc/hosts
+   15  ip a
+   16  vim /etc/hosts
+   17  init 6
+   18  ip a
+   19  ipup ens34
+   20  nmtui
+   21  ip a
+   22  nmtui
+   23  ip a
+   24  vim /etc/dhcp/dhcpd.conf 
+   25  vim /etc/dhcp/dhcpd.conf 
+   26  systemctl start dhcpd
+   27  systemctl stop dhcpd
+   28  systemctl restart dhcpd.service 
+   29  systemctl restart dhcpd service 
+   30  HPCSA -T
+   31  HPCSA -t
+   32  system status filewalld
+   33  systemctl status filewalld
+   34  systemctl status firewalld
+   35  systemctl stop firewalld
+   36  systemctl status firewalld
+   37  systemctl restart dhcpd.service 
+   38  systemctl restart dhcpd
+   39  systemctl start dhcpd
+   40  systemctl status dhcpd.service
+   41  systemctl start dhcpd
+   42  cat /etc/
+   43  cat /etc/dhcp/dhcpd.conf 
+   44  ping master
+   45  setenforce 0
+   46  systemctl start dhcpd
+   47  systemctl start dhcpd service
+   48  systemctl start dhcpd6.service 
+   49  systemctl start dhcpd.service 
+   50  systemctl start dhcpd6.service 
+   51  ip a
+   52  systemctl enable firewalld
+   53  systemctl start dhcrelay.service 
+   54  systemctl start dhcp
+   55  systemctl start dhcpd
+   56  systemctl restart dhcpd
+   57  df -Th
+   58  rep -qa | grep dhcp
+   59  rep -qa | grep dhcp*
+   60  rpm -qa | grep dhcp*
+   61  cp /usr/share/doc/dhcp-4.2.5/dhcpd.conf.example /etc/dhcp/dhcpd.conf
+   62  vim /etc/dhcp/dhcpd.conf 
+   63  systemctl status firewalld
+   64  service dhcpd start
+   65  systemctl start dhcpd
+   66  cat /var/log/example
+   67  cat /var/log
+   68  cat /var/log/dmesg
+   69  cat /var/log/mesg
+   70  cat /var/log/dmesg.old 
+   71  ip a
+   72  pint 192.168.19.10
+   73  ping 192.168.19.10
+   74  ip a
+   75  vim /etc/hosts
+   76  systemctl restart dhcpd.service 
+   77  systemctl restart dhcpd.service
+   78  systemctl restart dhcpd
+   79  vim /etc/dhcp/dhcpd.conf 
+   80  systemctl start dhcpd
+   81  init 6
+   82  vim /etc/dhcp/dhcpd.conf 
+   83  systemctl start dhcpd
+   84  systemctl stop dhcpd
+   85  systemctl restart dhcpd.service 
+   86  systemctl restart dhcpd service 
+   87  HPCSA -T
+   88  HPCSA -t
+   89  system status filewalld
+   90  systemctl status filewalld
+   91  systemctl status firewalld
+   92  systemctl stop firewalld
+   93  systemctl status firewalld
+   94  systemctl restart dhcpd.service 
+   95  systemctl restart dhcpd
+   96  systemctl start dhcpd
+   97  systemctl status dhcpd.service
+   98  systemctl start dhcpd
+   99  cat /etc/
+  100  cat /etc/dhcp/dhcpd.conf 
+  101  ping master
+  102  setenforce 0
+  103  systemctl start dhcpd
+  104  systemctl start dhcpd service
+  105  systemctl start dhcpd6.service 
+  106  systemctl start dhcpd.service 
+  107  systemctl start dhcpd6.service 
+  108  ip a
+  109  systemctl enable firewalld
+  110  systemctl start dhcrelay.service 
+  111  systemctl start dhcp
+  112  systemctl start dhcpd
+  113  systemctl restart dhcpd
+  114  df -Th
+  115  rep -qa | grep dhcp
+  116  rep -qa | grep dhcp*
+  117  rpm -qa | grep dhcp*
+  118  cp /usr/share/doc/dhcp-4.2.5/dhcpd.conf.example /etc/dhcp/dhcpd.conf
+  119  vim /etc/dhcp/dhcpd.conf 
+  120  systemctl status firewalld
+  121  service dhcpd start
+  122  systemctl start dhcpd
+  123  cat /var/log/example
+  124  cat /var/log
+  125  cat /var/log/dmesg
+  126  cat /var/log/mesg
+  127  cat /var/log/dmesg.old 
+  128  ip a
+  129  pint 192.168.19.10
+  130  ping 192.168.19.10
+  131  ip a
+  132  vim /etc/hosts
+  133  systemctl restart dhcpd.service 
+  134  systemctl restart dhcpd.service
+  135  systemctl restart dhcpd
+  136  vim /etc/dhcp/dhcpd.conf 
+  137  systemctl start dhcpd
+  138  init 6
+  139  ip a
+  140  systemctl status firewalld
+  141  systemctl stop firewalld
+  142  systemctl status firewalld
+  143  history
+  144  systemctl start dhcpd
+  145  systemctl start dhcpd6.service 
+  146  systemctl start dhcpd.service 
+  147  systemctl restart dhcpd.service 
+  148  vim /etc/dhcp/dhcpd.conf 
+  149  systemctl restart dhcpd.service 
+  150  systemctl start dhcpd.service 
+  151  init 6
+  152  ip a
+  153  systemctl status firewalld
+  154  systemctl stop firewalld
+  155  systemctl status firewalld
+  156  ip systemctl start dhcpd
+  157  systemctl start dhcpd
+  158  vim /etc/dhcp/dhcpd.conf 
+  159  systemctl start dhcpd
+  160  setenforce 0
+  161  getenforce
+  162  vim /etc/dhcp/dhcpd.conf 
+  163  systemctl start dhcpd
+  164  etc /etc/hosts
+  165  vim /etc/hosts
+  166  init 6
+  167  ip a
+  168  vim /etc/dhcp/dhcpd.conf 
+  169  systemctl start dhcpd
+  170  systemctl status dhcpd
+  171  systemctl enable dhcpd
+  172  systemctl start dhcpd
+  173  journalctl -xe
+  174  kill -9 809
+  175  systemctl start dhcpd
+  176  pkill -9 dhcpd
+  177  systemctl start dhcpd
+  178  systemctl start dhcpd.server
+  179  vim /etc/dhcp/dhcpd.conf 
+  180  systemctl start dhcpd
+  181  systemctl status dhcpd.service
+  182  vi /etc/dhcp/dhcpd.conf 
+  183  systemctl status dhcpd.service
+  184  systemctl start dhcpd
+  185  systemctl status dhcpd.service
+  186  vi /etc/dhcp/dhcpd.conf 
+  187  yum install syslinux xinetd tftp-server
+  188  mkdir /var/lib/tftpboot/pxelinux.cfg
+  189  cp /usr/share/syslinux/pxelinux.0 /var/lib/tftpboot/
+  190  cd /usr/share/syslinux/pxelinux.0 
+  191  vim /usr/share/syslinux/pxelinux.0 
+  192  ll /var/lib/tftpboot/
+  193  vim /etc/xinetd.d/tftp 
+  194  systemctl start xinetd.service 
+  195  systemctl status xinetd.service 
+  196  mkdir /var/pxe/centos7
+  197  mkdir -p /var/pxe/centos7
+  198  mkdir /var/lib/tftpboot/centos7
+  199  ll /var/lib/tftpboot/centos7
+  200  ll /mount
+  201  mount -t auto
+  202  mount -t iso9660 -o loop /dev/cdrom /var/pxe/centos7
+  203  mount -t iso9660 -o loop /dev/cdrom /var/pxe/centos7/
+  204  mount -t iso9660 -0 loop /dev/cdrom /var/pxe/centos7/
+  205  rpm -qa | grep tftp
+  206  yum install syslinux xinetd tftp-server*
+  207  rpm -qa | grep tftp
+  208  chmod 777 /tftpboot
+  209  chmod 777 /var/tftpboot
+  210  ll /var/lib/tftpboot/centos
+  211  chmod 777 /var/lib/tftpboot
+  212  mount -t iso9660 -o loop /dev/cdrom /var/pxe/centos7
+  213  mount -t iso9660 -o loop /dev/sd0 /var/pxe/centos7
+  214  lsblk
+  215  mount -t iso9660 -o loop /dev/sda /var/pxe/centos7
+  216  dmesg |tail
+  217  mount -t iso9660 -o loop /dev/cdom /var/pxe/centos7
+  218  mount -t iso9660 -0 loop /dev/cdom /var/pxe/centos7
+  219  mount -t iso9660 -o loop /dev/cdom /var/pxe/centos7
+  220  mount -t iso9660 -o loop /dev/cdrom /var/pxe/centos7
+  221  mount -t iso9660 -o loop /dev/sdr0 /var/pxe/centos7
+  222  mount -t iso9660 -o loop /dev/sdr /var/pxe/centos7
+  223  mount -t iso9660 -o loop /dev/sda /var/pxe/centos7
+  224  mount -t iso9660 -o loop0 /dev/sda /var/pxe/centos7
+  225  mount -t iso9660 -o loop0 /dev/cdrom /var/pxe/centos7
+  226  ll /var/pxe/centos7/
+  227  mount -t iso9660 -o loop0 /dev/cdrom /var/pxe/centos7
+  228  ll /mount
+  229  mount -t auto
+  230  mount -t iso9660 -o loop /dev/cdrom /var/pxe/centos7/
+  231  ls /dev/cdrom 
+  232  vim /dev/cdrom 
+  233  mount -t iso9660 -o loop /dev/cdrom /var/pxe/centos
+  234  rm /var/pxe/centos7
+  235  rm -l /var/pxe/centos7
+  236  rm -r /var/pxe/centos7
+  237  cd /var/pxe/
+  238  ls
+  239  mkdri centos
+  240  ls'
+  241  mkdir centos
+  242  ls
+  243  mount -t iso9660-o loop /dev/cdrom /var/pxe/centos/
+  244  mount -t iso9660-o loop /dev/cdrom /var/pxe/centos
+  245  mount -t iso9660 -o loop /dev/cdrom /var/pxe/centos
+  246  ll /umount
+  247  ll unmount
+  248  ll /unmount
+  249  ll /umount
+  250  ll /mount
+  251  mount -t auto
+  252  mount -t iso 9660 -o loop /dev/cdrom /var/pxe/centos/
+  253  cd
+  254  vim /etc/xinetd.d/tftp 
+  255  #/var/lib/tftpboot
+  256  cat /var/lib/tftpboot/pxelinux.0
+  257  systemctl status xinetd.service 
+  258  systemctl status firewall
+  259  systemctl status firewalld
+  260  systemctl stop firewalld
+  261  systemctl enable firewalld
+  262  systemctl restart dhcpd
+  263  systemctl enable dhcpd
+  264  systemctl status dhcpd
+  265  vim /var/lib/tftpboot/
+  266  vim /usr/share/syslinux/pxelinux.0 /var/lib/tftpboot/
+  267  ll /var/lib/tftpboot/
+  268  vim /var/lib/tftpboot/pxelinux.0
+  269  ls /var/pxe/centos/
+  270  ls /var/lib/tftpboot/centos7
+  271  mount -t iso9660 -o loop /dev/cdrom /var/pxe/centos/
+  272  mount -t iso9660 -o loop /dev/cdrom /var/pxe/centos
+  273  cd /var/pxe/centos
+  274  ls
+  275  mount -t iso9660 -o loop /dev/cdrom /var/pxe/centos/
+  276  mount -t iso9660 -o loop /dev/cdrom /var/pxe/centos
